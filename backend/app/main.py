@@ -21,7 +21,12 @@ app = FastAPI(title="Team Task Manager API", version="1.0.0")
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001"],
+    # Add your NEW Railway Frontend URL here:
+    allow_origins=[
+        "http://localhost:3000", 
+        "http://localhost:5173",
+        "https://comfortable-achievement-production.up.railway.app" # <--- Paste your URL here
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
