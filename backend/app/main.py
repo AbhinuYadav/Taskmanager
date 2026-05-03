@@ -1,0 +1,50 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from .database import engine, Base, test_connection
+from .routers import auth, projects, tasks, members
+import os
+
+print("=" * 50)
+print("Starting Task Manager API")
+print("=" * 50)
+
+# Test database connection
+test_connection()
+
+# Create database tables
+print("📋 Creating database tables...")
+Base.metadata.create_all(bind=engine)
+print("✅ Database tables ready!")
+
+app = FastAPI(title="Team Task Manager API", version="1.0.0")
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://localhost:3001"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Include routers
+app.include_router(auth.router)
+app.include_router(projects.router)
+app.include_router(tasks.router)
+app.include_router(members.router)
+
+@app.get("/")
+def root():
+    return {
+        "message": "Team Task Manager API", 
+        "status": "running", 
+        "database": "PostgreSQL"
+    }
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "database": "connected"}
+
+print("=" * 50)
+print("🚀 Server is ready to start!")
+print("=" * 50)
