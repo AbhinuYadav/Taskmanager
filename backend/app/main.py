@@ -25,7 +25,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000", 
         "http://localhost:5173",
-        "https://comfortable-achievement-production.up.railway.app" # <--- Paste your URL here
+        "https://comfortable-achievement-production.up.railway.app",
+        "https://comfortable-achievement-production-6e17.up.railway.app"# <--- Paste your URL here
     ],
     allow_credentials=True,
     allow_methods=["*"],
