@@ -27,7 +27,8 @@ app.add_middleware(
         "http://localhost:3000", 
         "http://localhost:5173",
         "https://comfortable-achievement-production.up.railway.app",
-        "https://comfortable-achievement-production-6e17.up.railway.app"# <--- Paste your URL here
+        "https://comfortable-achievement-production-6e17.up.railway.app",
+        "https://taskmanager-app-by-abhinu.up.railway.app"# <--- Paste your URL here
     ],
     allow_credentials=True,
     allow_methods=["*"],
