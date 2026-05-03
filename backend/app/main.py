@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 from .database import engine, Base, test_connection
 from .routers import auth, projects, tasks, members
 import os
@@ -17,7 +18,7 @@ Base.metadata.create_all(bind=engine)
 print("✅ Database tables ready!")
 
 app = FastAPI(title="Team Task Manager API", version="1.0.0")
-
+app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
